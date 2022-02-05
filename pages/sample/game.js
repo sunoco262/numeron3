@@ -17,6 +17,7 @@ export default function Home() {
       <div className="body">
         <Numeron />
         <History/>
+        <h3>ルーム？</h3>
         <Link href="/"><a>サンプルページへ</a></Link>
       </div>
     </div>

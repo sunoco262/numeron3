@@ -2,6 +2,7 @@
 // import Link from 'next/link'
 import React, { Component } from 'react';
 import axios from 'axios';
+import Link from 'next/link'
 
 class App extends Component {
     state = {
@@ -35,6 +36,7 @@ class App extends Component {
                         <p>{item.num}人</p>
                      </div>
                 ))}
+                <Link href="sample/wait"><a>部屋作成</a></Link>
             </div>
         );
     }
