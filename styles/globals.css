@@ -15,10 +15,10 @@ body {
 }
 .box{
   position:absolute;
-  top:10vh;
-  left:10vw;
-  width:80vw;
-  height:30vh;
+  top:4vh;
+  left:45vw;
+  width:50vw;
+  height:40vh;
   background-color: rgb(10,10,10);
   opacity:0.6;
   overflow-y:scroll;

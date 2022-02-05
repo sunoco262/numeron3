@@ -14,7 +14,9 @@ class App extends Component {
 
     getPosts() {
         axios
+
             .get('http://localhost:8000/getRoom')
+
             .then(res => {
                 console.log(res.data.room)
                 this.setState({ posts: res.data.room });

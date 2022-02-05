@@ -43,6 +43,7 @@ function check(ans, input) {
     }
     str = "eat" + eat + " bite" + bite;
   }
+  if(eat == 4){shuffle()};
   history.push(input+" "+str)
   console.log(history)
   return str;
@@ -53,7 +54,6 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "4桁の数字を入力してください",
       form:form,
       cursor:cursor,
       checkCount:0,
@@ -97,7 +97,6 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.message}</h1>
         <h1>{this.state.form}</h1>
         <h1>{this.state.checkCount}回</h1>
 
