@@ -1,7 +1,7 @@
 
 // import Link from 'next/link'
 import React, { Component } from 'react';
-import Axios from 'Axios';
+import axios from 'axios';
 
 class App extends Component {
     state = {
@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     getPosts() {
-        Axios
+        axios
             .get('http://localhost:8000/api/v1/')
             .then(res => {
                 this.setState({ posts: res.data });

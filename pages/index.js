@@ -1,7 +1,6 @@
 import Head from 'next/head'
 // import Image from 'next/image'
 import Numeron from "./Numeron.js";
-import Timer from "./Timer.js";
 import History from "./History.js";
 import Link from 'next/link'
 
@@ -17,7 +16,6 @@ export default function Home() {
       </Head>
       <div className="body">
         <Numeron />
-        <Timer/>
         <History/>
         <Link href="/sample/ranking"><a>サンプルページへ</a></Link>
       </div>
