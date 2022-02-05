@@ -15,7 +15,7 @@ class App extends Component {
     getPosts() {
         axios
 
-            .get('http://localhost:8000/getRoom')
+            .get('http://localhost:8000/getRooms')
 
             .then(res => {
                 console.log(res.data.room)
