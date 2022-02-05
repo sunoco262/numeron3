@@ -1,12 +1,27 @@
-import React, { Component } from "react";
 import InputButton from "./InputButton";
 import History from "./History";
-
+import React, { Component } from 'react';
+import axios from 'axios';
+import Link from 'next/link'
+import { useRouter } from 'next/router';
 //todo Numeronの判定に変える
 //ansがint型の配列　inputがstr型の文字列
 let form ="_ _ _ _";
 let cursor = 0;
 let history = [];//文字列を入れる
+function createGuess(room_id,info,eat,bite){
+  axios
+    .get('http://localhost:8000/createGuess?room_id='+room_id+'&info='+info+'&eat='+eat+'&bite='+bite)//todo
+
+    .then(res => {
+        console.log(res)
+        
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 function initializeForm(num){
   form ="_ _ _ _";
   cursor = 0;
@@ -19,7 +34,7 @@ function editform(num){
   console.log(ary)
   form = ary.join(" ");
 }
-function check(ans, input) {
+function check(ans, input,room_id) {
   var eat, bite;
   var num = [0, 0, 0, 0];
   var a, b;
@@ -46,6 +61,7 @@ function check(ans, input) {
   if(eat == 4){shuffle()};
   history.push(input+" "+str)
   console.log(history)
+  createGuess(room_id,input,eat,bite)
   return str;
 }
 class Form extends Component {
@@ -86,8 +102,10 @@ class Form extends Component {
   submitForm() {
     console.log(parseInt(this.state.form.split(" ").join("")))
     initializeForm();
+    var input = this.state.form.split(" ").join("");
+
     this.setState({
-      message: check(this.props.keyword,parseInt(this.state.form.split(" ").join(""))) + "!!",
+      message: check(this.props.keyword,parseInt(input),this.props.room_id) + "!!",
       form:form,
       cursor:cursor,
       checkCount:this.state.checkCount+1
@@ -113,7 +131,7 @@ class Form extends Component {
         <div onClick={()=>this.inputForm("0")}><InputButton x="40" y="86" text="0"  /></div>
         <div onClick={()=>this.submitForm()}><InputButton x="70" y="86" text="✔"  /></div>
 
-        <History history={this.state.history.join("\n")}/>
+        <History history={this.state.history.join("___")}/>
         
       </div>
     );

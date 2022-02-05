@@ -13,7 +13,7 @@ class History extends Component {
   render() {
     return (
       <div className="box">
-        <p onClick={()=>test}>{this.props.history}</p>
+        <p>{this.props.history}</p>
         
       </div>
     );

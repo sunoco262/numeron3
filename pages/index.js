@@ -3,7 +3,31 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Link from 'next/link'
+function joinRoom(num){
+    axios
+      .get('http://localhost:8000/joinRoom?id='+num)
+  
+      .then(res => {
+          console.log(res)
+          
+      })
+      .catch(err => {
+          console.log(err);
+      });
+  }
 
+  function createRoom(){
+    axios
+      .get('http://localhost:8000/createRoom')
+  
+      .then(res => {
+          console.log(res)
+          
+      })
+      .catch(err => {
+          console.log(err);
+      });
+  }
 class App extends Component {
     state = {
         posts: []
@@ -32,11 +56,11 @@ class App extends Component {
             <div>
                 {this.state.posts.map(item => (
                      <div key={item.id}>
-                        <h1>ルーム{item.id}</h1>
+                        <Link href={"sample/wait?id="+item.id}><a onClick={()=>joinRoom(item.id)}>ルーム{item.id}</a></Link>
                         <p>{item.num}人</p>
                      </div>
                 ))}
-                <Link href="sample/wait"><a>部屋作成</a></Link>
+                <Link href="#"><a onClick={createRoom}>部屋作成</a></Link>
             </div>
         );
     }

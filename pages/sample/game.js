@@ -1,4 +1,8 @@
 import Head from 'next/head'
+import React, { useState,useEffect } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
 // import Image from 'next/image'
 import Numeron from "../Numeron.js";
 import History from "../History.js";
@@ -6,7 +10,22 @@ import Link from 'next/link'
 
 import styles from '../../styles/Home.module.css'
 
+function leftRoom(num){
+  axios
+    .get('http://localhost:8000/leftRoom?id='+num)
+
+    .then(res => {
+        console.log(res)
+        
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 export default function Home() {
+  const router = useRouter();
+  const query = router.query;
   return (
     <div className={styles.container}>
       <Head>
@@ -15,10 +34,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="body">
-        <Numeron />
+        <Numeron room_id={query.id}/>
         <History/>
-        <h3>ルーム？</h3>
-        <Link href="/"><a>サンプルページへ</a></Link>
+        <h3>ルーム{query.id}</h3>
+        <Link href="/"><a onClick={()=>leftRoom(query.id)}>退室</a></Link>
       </div>
     </div>
   )

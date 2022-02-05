@@ -37,7 +37,7 @@ class Numeron extends Component {
       <>
         <h1>{this.state.data}</h1>
         <button onClick={this.shuffle}>シャッフル</button>
-        <Form keyword={this.state.data} />
+        <Form keyword={this.state.data} room_id={this.props.room_id}/>
       </>
     );
   }

@@ -19,13 +19,20 @@ body {
   left:45vw;
   width:50vw;
   height:40vh;
-  background-color: rgb(10,10,10);
-  opacity:0.6;
-  overflow-y:scroll;
+  color: #6091d3;/*文字色*/
+  border: solid 3px black;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  /* overflow-y:scroll; */
 }
 .box p{
+  position: relative;
+  top:0;
+  left:0;
+  width:40vw;
+  height:30vh;
   color:white;
   opacity:1;
+  z-index: 10;
 }
 a {
   color: inherit;
