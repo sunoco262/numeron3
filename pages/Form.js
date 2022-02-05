@@ -2,8 +2,7 @@ import InputButton from "./InputButton";
 import History from "./History";
 import React, { Component } from 'react';
 import axios from 'axios';
-import Link from 'next/link'
-import { useRouter } from 'next/router';
+
 //todo Numeronの判定に変える
 //ansがint型の配列　inputがstr型の文字列
 let form ="_ _ _ _";
