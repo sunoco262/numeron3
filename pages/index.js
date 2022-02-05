@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Numeron from "./Numeron.js";
 import Timer from "./Timer.js";
 import History from "./History.js";
+import Link from 'next/link'
+
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -17,6 +19,7 @@ export default function Home() {
         <Numeron />
         <Timer/>
         <History/>
+        <Link href="/sample/other"><a>サンプルページへ</a></Link>
       </div>
     </div>
   )
