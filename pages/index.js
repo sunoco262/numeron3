@@ -19,7 +19,7 @@ export default function Home() {
         <Numeron />
         <Timer/>
         <History/>
-        <Link href="/sample/other"><a>サンプルページへ</a></Link>
+        <Link href="/sample/ranking"><a>サンプルページへ</a></Link>
       </div>
     </div>
   )
