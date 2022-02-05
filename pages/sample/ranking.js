@@ -1,7 +1,7 @@
 
 // import Link from 'next/link'
 import React, { Component } from 'react';
-import Axios from 'Axios';
+import axios from 'axios';
 
 class App extends Component {
     state = {
@@ -13,10 +13,11 @@ class App extends Component {
     }
 
     getPosts() {
-        Axios
-            .get('http://localhost:8000/api/v1/')
+        axios
+            .get('http://localhost:8000/getRoom')
             .then(res => {
-                this.setState({ posts: res.data });
+                console.log(res.data.room)
+                this.setState({ posts: res.data.room });
             })
             .catch(err => {
                 console.log(err);
@@ -28,8 +29,8 @@ class App extends Component {
             <div>
                 {this.state.posts.map(item => (
                      <div key={item.id}>
-                        <h1>{item.title}</h1>
-                        <p>{item.date}</p>
+                        <h1>ルーム{item.id}</h1>
+                        <p>{item.num}人</p>
                      </div>
                 ))}
             </div>
