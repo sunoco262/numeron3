@@ -5,7 +5,7 @@ import axios from 'axios';
 import Link from 'next/link'
 function joinRoom(num){
     axios
-      .get('http://localhost:8000/joinRoom?id='+num)
+      .get('http://numeronbackend.azurewebsites.net/joinRoom?id='+num)
   
       .then(res => {
           console.log(res)
@@ -18,7 +18,7 @@ function joinRoom(num){
 
   function createRoom(){
     axios
-      .get('http://localhost:8000/createRoom')
+      .get('http://numeronbackend.azurewebsites.net/createRoom')
   
       .then(res => {
         console.log(res)
@@ -40,7 +40,7 @@ class App extends Component {
         setInterval(() => {
             axios
 
-            .get('http://localhost:8000/getRooms')
+            .get('http://numeronbackend.azurewebsites.net/getRooms')
 
             .then(res => {
                 console.log(res.data.room)
