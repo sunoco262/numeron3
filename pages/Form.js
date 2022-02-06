@@ -79,7 +79,7 @@ class Form extends Component {
       });
   
       
-    }, 500);
+    }, 3000);
   }
   
   

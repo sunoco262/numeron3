@@ -50,7 +50,7 @@ export default function Wait() {
           .catch(err => {
               console.log(err);
           });
-    }, 500);
+    }, 3000);
     return function(){clearInterval(intervalId)};
   }, [query]);
   

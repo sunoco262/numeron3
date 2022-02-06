@@ -49,7 +49,7 @@ class App extends Component {
             .catch(err => {
                 console.log(err);
             });
-          }, 500);
+          }, 3000);
     }
 
     getPosts() {
