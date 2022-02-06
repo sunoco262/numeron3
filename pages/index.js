@@ -21,13 +21,15 @@ function joinRoom(num){
       .get('http://localhost:8000/createRoom')
   
       .then(res => {
-          console.log(res)
+        console.log(res)
           
       })
       .catch(err => {
           console.log(err);
       });
   }
+
+  
 class App extends Component {
     state = {
         posts: []
@@ -35,6 +37,19 @@ class App extends Component {
 
     componentDidMount() {
         this.getPosts();
+        setInterval(() => {
+            axios
+
+            .get('http://localhost:8000/getRooms')
+
+            .then(res => {
+                console.log(res.data.room)
+                this.setState({ posts: res.data.room });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+          }, 500);
     }
 
     getPosts() {
@@ -60,7 +75,7 @@ class App extends Component {
                         <p>{item.num}人</p>
                      </div>
                 ))}
-                <Link href="#"><a onClick={createRoom}>部屋作成</a></Link>
+                <div onClick={createRoom}>部屋作成</div>
             </div>
         );
     }

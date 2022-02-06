@@ -1,23 +1,53 @@
-import React, { Component } from "react";
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
 
-class History extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-     
-    };
-  }
+import { useRouter } from 'next/router';
+
+
+export default function History() {
+  const router = useRouter();
+  const query = router.query;
+  const [history,setHistory] = useState([])
+
+  React.useEffect(function() {
+    const intervalId = setInterval(function() {
+      console.log(router.query.id)
+      axios
+          .get('http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
+
+          .then(res => {
+              // console.log(res.data.room.num)
+              setHistory(res.data.guess);
+              
+          })
+          .catch(err => {
+              console.log(err);
+          });
+    }, 500);
+    return function(){clearInterval(intervalId)};
+  }, [query]);
   
-  
-  render() {
-    return (
-      <div className="box">
-        <p>{this.props.history}</p>
+
+  useEffect(()=> {
+      axios
+
+          .get('http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
+
+          .then(res => {
+              setHistory(res.data.guess);
+          })
+          .catch(err => {
+              console.log(err);
+          });
+  },[query])
+  return (
+    <div className="box">
+        {history.map(item => (
+          <div key={item.id}>
+            <p>{item.info} {item.eat}eat {item.bite}bite</p>
+          </div>
+        ))}
         
       </div>
-    );
-  }
+  )
 }
-
-export default History;

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 function leftRoom(num){
   axios
-    .get('http://localhost:8000/leftRoom?id='+num)
+    .get('http://numeronbackend.azurewebsites.net/leftRoom?id='+num)
 
     .then(res => {
         console.log(res)
@@ -19,7 +19,7 @@ function leftRoom(num){
 }
 function setCode(num){
   axios
-    .get('http://localhost:8000/setCode?code="1234"&id='+num)//todo
+    .get('http://numeronbackend.azurewebsites.net/setCode?id='+num)
 
     .then(res => {
         console.log(res)
@@ -40,7 +40,7 @@ export default function Wait() {
     const intervalId = setInterval(function() {
       console.log(router.query.id)
       axios
-          .get('http://localhost:8000/getRoom?id='+query.id)
+          .get('http://numeronbackend.azurewebsites.net/getRoom?id='+query.id)
 
           .then(res => {
               // console.log(res.data.room.num)
@@ -50,7 +50,7 @@ export default function Wait() {
           .catch(err => {
               console.log(err);
           });
-    }, 1000);
+    }, 500);
     return function(){clearInterval(intervalId)};
   }, [query]);
   
@@ -58,7 +58,7 @@ export default function Wait() {
   useEffect(()=> {
       axios
 
-          .get('http://localhost:8000/getRoom?id='+query.id)
+          .get('http://numeronbackend.azurewebsites.net/getRoom?id='+query.id)
 
           .then(res => {
               console.log(res.data.room.num)

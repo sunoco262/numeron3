@@ -10,7 +10,7 @@ let cursor = 0;
 let history = [];//文字列を入れる
 function createGuess(room_id,info,eat,bite){
   axios
-    .get('http://localhost:8000/createGuess?room_id='+room_id+'&info='+info+'&eat='+eat+'&bite='+bite)//todo
+    .get('http://numeronbackend.azurewebsites.net/createGuess?room_id='+room_id+'&info='+info+'&eat='+eat+'&bite='+bite)
 
     .then(res => {
         console.log(res)
@@ -33,35 +33,20 @@ function editform(num){
   console.log(ary)
   form = ary.join(" ");
 }
-function check(ans, input,room_id) {
-  var eat, bite;
-  var num = [0, 0, 0, 0];
-  var a, b;
-  var str;
+function check(input,room_id) {
+  console.log(room_id+" "+input)
+  axios
+    .get('http://numeronbackend.azurewebsites.net/checkCode?id='+room_id+'&input='+input)
 
-  num[0] = parseInt(input / 1000, 10);
-  num[1] = parseInt((input - num[0] * 1000) / 100, 10);
-  num[2] = parseInt((input - num[0] * 1000 - num[1] * 100) / 10, 10);
-  num[3] = parseInt(input - num[0] * 1000 - num[1] * 100 - num[2] * 10, 10);
-
-  eat = 0;
-  bite = 0;
-  for (a = 0; a < 4; a++) {
-    if (num[a] === ans[a]) {
-      eat++;
-    }
-    for (b = 0; b < 4; b++) {
-      if (a !== b && num[a] === ans[b]) {
-        bite++;
-      }
-    }
-    str = "eat" + eat + " bite" + bite;
-  }
-  if(eat == 4){shuffle()};
-  history.push(input+" "+str)
-  console.log(history)
-  createGuess(room_id,input,eat,bite)
-  return str;
+    .then(res => {
+        console.log(res.data.data.code)
+        createGuess(room_id,input,res.data.data.eat,res.data.data.bite)
+        return(res.data.data)
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  
 }
 class Form extends Component {
   input = "";
@@ -76,7 +61,26 @@ class Form extends Component {
     };
     this.inputForm = this.inputForm.bind(this);
   }
+  // コンポーネントがマウントされた後に実行
+  componentDidMount() {
+    // ----------- ①
+    setInterval(() => {
+        axios
+      .get('http://numeronbackend.azurewebsites.net/getCount?id='+this.props.room_id)
 
+      .then(res => {
+        console.log(res.data.count)
+        this.setState({
+          checkCount: res.data.count
+        });
+      })
+      .catch(err => {
+          console.log(err);
+      });
+  
+      
+    }, 500);
+  }
   
   
   inputForm(num){
@@ -102,9 +106,10 @@ class Form extends Component {
     console.log(parseInt(this.state.form.split(" ").join("")))
     initializeForm();
     var input = this.state.form.split(" ").join("");
-
+    var r = check(input,this.props.room_id)
+    console.log(r);
     this.setState({
-      message: check(this.props.keyword,parseInt(input),this.props.room_id) + "!!",
+      message: "",
       form:form,
       cursor:cursor,
       checkCount:this.state.checkCount+1
@@ -115,7 +120,7 @@ class Form extends Component {
     return (
       <div>
         <h1>{this.state.form}</h1>
-        <h1>{this.state.checkCount}回</h1>
+        <h1>計{this.state.checkCount}回</h1>
 
         <div onClick={()=>this.inputForm("1")}><InputButton x="10" y="50" text="1"  /></div>
         <div onClick={()=>this.inputForm("2")}><InputButton x="40" y="50" text="2"  /></div>
@@ -129,8 +134,6 @@ class Form extends Component {
         <div onClick={()=>this.deleteForm()}><InputButton x="10" y="86" text="←"  /></div>
         <div onClick={()=>this.inputForm("0")}><InputButton x="40" y="86" text="0"  /></div>
         <div onClick={()=>this.submitForm()}><InputButton x="70" y="86" text="✔"  /></div>
-
-        <History history={this.state.history.join("___")}/>
         
       </div>
     );

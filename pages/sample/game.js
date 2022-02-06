@@ -11,7 +11,7 @@ import styles from '../../styles/Home.module.css'
 
 function leftRoom(num){
   axios
-    .get('http://localhost:8000/leftRoom?id='+num)
+    .get('http://numeronbackend.azurewebsites.net/leftRoom?id='+num)
 
     .then(res => {
         console.log(res)
