@@ -18,6 +18,7 @@ function leftRoom(num){
     });
 }
 function setCode(num){
+  console.log("リクエスト："+'http://numeronbackend.azurewebsites.net/setCode?id='+num)
   axios
     .get('http://numeronbackend.azurewebsites.net/setCode?id='+num)
 
