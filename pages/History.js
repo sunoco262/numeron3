@@ -11,14 +11,13 @@ export default function History() {
 
   React.useEffect(function() {
     const intervalId = setInterval(function() {
-      console.log(router.query.id)
+      console.log('リクエスト：http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
       axios
           .get('http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
 
           .then(res => {
-              // console.log(res.data.room.num)
-              setHistory(res.data.guess);
-              
+              console.log('レスポンス：'+res.data.guess)
+              setHistory(res.data.guess);             
           })
           .catch(err => {
               console.log(err);
@@ -29,12 +28,15 @@ export default function History() {
   
 
   useEffect(()=> {
+    console.log('リクエスト：http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
+
       axios
 
           .get('http://numeronbackend.azurewebsites.net/getGuess?id='+query.id)
 
           .then(res => {
-              setHistory(res.data.guess);
+            console.log('レスポンス：'+res.data.guess)
+            setHistory(res.data.guess);
           })
           .catch(err => {
               console.log(err);
