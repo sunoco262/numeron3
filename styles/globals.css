@@ -16,8 +16,8 @@ body {
 .box{
   position:absolute;
   top:4vh;
-  left:45vw;
-  width:50vw;
+  left:60vw;
+  width:30vw;
   height:40vh;
   color: #6091d3;/*文字色*/
   border: solid 3px black;/*線*/
@@ -27,7 +27,6 @@ body {
 .box p{
   
   color:white;
-  opacity:1;
   z-index: 10;
 }
 a {
