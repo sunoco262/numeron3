@@ -37,6 +37,7 @@ export default function Home() {
         <History/>
         <h3>ルーム{query.id}</h3>
         <Link href="/"><a onClick={()=>leftRoom(query.id)}>退室</a></Link>
+        <p></p>
         <Link href="https://calm-bay-090786e10.1.azurestaticapps.net/"><a>1人で遊ぶ場合はこちら</a></Link>
 
       </div>
